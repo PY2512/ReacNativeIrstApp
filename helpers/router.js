@@ -12,6 +12,9 @@ import ProfileScreen from '../screens/mainScreen/ProfileScreen';
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
+import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+
 
 export const useRoute = (isAuth) => {
     if (!isAuth) {
@@ -28,9 +31,28 @@ export const useRoute = (isAuth) => {
     </AuthStack.Navigator>
       )
     }
-    return <MainTab.Navigator>
-        <MainTab.Screen name="Posts" component={PostsScreen}/>
-        <MainTab.Screen name="Crete" component={CreateScreen}/>
-        <MainTab.Screen name="Profile" component={ProfileScreen}/>
+    return <MainTab.Navigator tabBarOptions={{showLabel: false}}>
+        <MainTab.Screen 
+          options={{
+            headerShown: false, 
+            tabBarIcon: ({focused, size, color}) => 
+              <Ionicons name="ios-grid-outline" size={size} color={color} />
+              }
+            }  
+          name="Posts" 
+          component={PostsScreen}/>
+        <MainTab.Screen 
+          options={{
+            headerShown: false, 
+            tabBarIcon: ({focused, size, color}) => 
+              <Ionicons name="add" size={size} color={color} />}} 
+          name="Crete" 
+          component={CreateScreen}/>
+        <MainTab.Screen 
+          options={{headerShown: false,
+          tabBarIcon: ({focused, size, color}) => 
+              <Feather name="user" size={size} color={color} />}} 
+          name="Profile"
+          component={ProfileScreen}/>
       </MainTab.Navigator>
   }
